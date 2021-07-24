@@ -1,11 +1,13 @@
 from typing import Any, Dict, Union
 from json import dumps as json_dumps
+from dataclasses import dataclass
 
 
+@dataclass
 class EventClass:
+    version_id: str
     timestamp: str = None
     visitor_id: str = None
-    version_id: str
 
     @property
     def event_id(self) -> str:

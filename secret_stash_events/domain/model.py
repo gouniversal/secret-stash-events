@@ -4,8 +4,9 @@ from dataclasses import dataclass
 
 @dataclass
 class PageView(EventClass):
-    version_id: str = "01"
+
+    ip_address: str = None
+    path: str = None
     session_id: str = None
     user_agent: str = None
-    path: str = None
-    ip_address: str = None
+    version_id: str = "01"

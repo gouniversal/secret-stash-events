@@ -29,18 +29,6 @@ def test_model_schema(class_name, field_name, expected_value):
     assert getattr(event_class, field_name) == expected_value
 
 
-@pytest.mark.parametrize("class_name, field_name, expected_value",
-    [
-        ("PageView", "dataflow_bigquery_schema",
-         'version_id:STRING,session_id:STRING,user_agent:STRING,path:STRING,ip_address:STRING'),
-    ]
-)
-def test_model_dataflow_bigquery_schema(class_name, field_name, expected_value):
-    EventClass = getattr(model, class_name)
-    event_class = EventClass()
-    assert getattr(event_class, field_name) == expected_value
-
-
 @pytest.mark.parametrize("class_name, input_type, expected_type",
     [
         ("PageView", "string", "STRING"),
