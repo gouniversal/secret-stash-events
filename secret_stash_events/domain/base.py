@@ -36,7 +36,9 @@ class EventClass:
         return types_.get(value, None)
 
     def to_dict(self) -> Dict[str, Any]:
-        return {k: v for k, v in self.__dict__.items()}
+        _dict = {k: v for k, v in self.__dict__.items()}
+        _dict["event_id"] = self.event_id
+        return _dict
 
     def to_bytes(self) -> bytes:
         return json_dumps(self.to_dict()).encode('utf-8')
