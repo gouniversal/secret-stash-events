@@ -8,10 +8,7 @@ class EventClass:
 
     @property
     def _event_id(self) -> str:
-        event_version = f"{self.__class__.__name__}{self.version_id}"
-        return "".join(
-            ["_" + i.lower() if (i.isupper() or i.isnumeric()) else i for i in event_version]
-        ).lstrip("_")
+        return self.__class__.__name__
 
     @property
     def dataflow_bigquery_schema(self) -> str:
