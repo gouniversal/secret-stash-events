@@ -20,7 +20,19 @@ def test_model_event_id(class_name, field_name, expected_value):
 
 @pytest.mark.parametrize("class_name, field_name, expected_value",
     [
-        ("PageView", "schema", {'version_id': 'str', 'session_id': 'str', 'user_agent': 'str', 'path': 'str', 'ip_address': 'str',}),
+        (
+            "PageView", "schema",
+            {
+                'event_id': 'str',
+                'version_id': 'str',
+                'session_id': 'str',
+                'user_agent': 'str',
+                'path': 'str',
+                'ip_address': 'str',
+                'timestamp': 'str',
+                'visitor_id': 'str',
+            }
+         ),
     ]
 )
 def test_model_schema(class_name, field_name, expected_value):
@@ -51,3 +63,4 @@ def test_event_id(class_name, version_id, expected_event_id):
     EventClass = getattr(model, class_name)
     event_class = EventClass(version_id=version_id)
     assert event_class.event_id == expected_event_id
+    assert event_class.to_dict()["event_id"] == expected_event_id

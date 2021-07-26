@@ -5,12 +5,9 @@ from dataclasses import dataclass
 
 @dataclass
 class EventClass:
-    version_id: str
-    timestamp: str = None
-    visitor_id: str = None
 
     @property
-    def event_id(self) -> str:
+    def _event_id(self) -> str:
         event_version = f"{self.__class__.__name__}{self.version_id}"
         return "".join(
             ["_" + i.lower() if (i.isupper() or i.isnumeric()) else i for i in event_version]
@@ -36,9 +33,7 @@ class EventClass:
         return types_.get(value, None)
 
     def to_dict(self) -> Dict[str, Any]:
-        _dict = {k: v for k, v in self.__dict__.items()}
-        _dict["event_id"] = self.event_id
-        return _dict
+        return {k: v for k, v in self.__dict__.items()}
 
     def to_bytes(self) -> bytes:
         return json_dumps(self.to_dict()).encode('utf-8')

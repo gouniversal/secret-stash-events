@@ -4,9 +4,14 @@ from dataclasses import dataclass
 
 @dataclass
 class PageView(EventClass):
-
+    event_id: str = None
     ip_address: str = None
     path: str = None
     session_id: str = None
+    timestamp: str = None
     user_agent: str = None
     version_id: str = "01"
+    visitor_id: str = None
+
+    def __post_init__(self):
+        self.event_id = self._event_id
